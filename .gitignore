@@ -1,9 +1,9 @@
 _site
-lib
+# lib
 dump.rdb
 .DS_Store
 .bower.json
-node_modules
+# node_modules
 bower_components
 .jekyll-cache
 .idea

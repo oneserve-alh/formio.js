@@ -604,7 +604,13 @@ export default class FileComponent extends Field {
         webViewCamera.getPicture((success) =&gt; {
           window.resolveLocalFileSystemURL(success, (fileEntry) =&gt; {
               fileEntry.file((file) =&gt; {
-                this.upload([file]);
+                var reader = new FileReader();
+                reader.onloadend = function(evt) {
+                  var blob = new Blob([new Uint8Array(this.result)], { type: file.type });
+                  blob.name = &apos;photo-&apos;.concat(Date.now(), &apos;.png&apos;);
+                  this.upload([blob]);
+                };
+                reader.readAsArrayBuffer(file);
               });
             }
           );
@@ -622,7 +628,14 @@ export default class FileComponent extends Field {
         webViewCamera.getPicture((success) =&gt; {
           window.resolveLocalFileSystemURL(success, (fileEntry) =&gt; {
               fileEntry.file((file) =&gt; {
-                this.upload([file]);
+                var reader = new FileReader();
+                reader.onloadend = function(evt) {
+                  var blob = new Blob([new Uint8Array(this.result)], { type: file.type });
+                  blob.name = &apos;photo-&apos;.concat(Date.now(), &apos;.png&apos;);
+                  console.log(blob.size);
+                  this.upload([blob]);
+                };
+                reader.readAsArrayBuffer(file);
               });
             }
           );
